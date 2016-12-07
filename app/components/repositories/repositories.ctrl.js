@@ -11,10 +11,9 @@
    */
   var RepositoriesCtrl = function($scope, RepositoriesFactory) {
 
-    $scope.repos = RepositoriesFactory.getRepositories();
+    $scope.repos = [];
 
-
-    function replaceSpecialChars(str) {
+    var replaceSpecialChars = function(str) {
       str = str.replace(/[ÀÁÂÃÄÅ]/, "A");
       str = str.replace(/[àáâãäå]/, "a");
       str = str.replace(/[ÈÉÊË]/, "E");
@@ -30,6 +29,25 @@
       str = str.toLowerCase();
       return str.replace(/[^a-z0-9\s]/gi, '');
     }
+
+    var formatRepos = function(repos) {
+      var reposFormatted = [];
+      angular.forEach(repos, function(value){
+        reposFormatted.push({
+          owner: value.owner.login,
+          name: value.name,
+          language: value.language,
+          stars: value.stargazers_count,
+          forks: value.forks_count
+        });
+      });
+    }
+
+    RepositoriesFactory.getRepositories('radames-rex').then(function(data){
+      $scope.repos = formatRepos(data);
+      $scope.$apply();
+    });
+
     $scope.ignoreAccents = function(item) {
       if($scope.search != undefined){
         var text = replaceSpecialChars(item.name);
