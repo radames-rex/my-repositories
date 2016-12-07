@@ -8,17 +8,18 @@
 <md-content flex>
   <md-list>
     <md-list-item class="md-3-line" ng-repeat="item in repos">
-      <img ng-src="{{item.language}}" alt="{{item.language}}" class="md-avatar">
+      <img ng-src="{{item.language}}.svg" alt="{{item.language}}" class="md-avatar">
 
       <div class="md-list-item-text">
         <h3><md-icon md-svg-icon="images/icons/tag.svg" style="color: #000;" aria-label="Repositorie Icon"></md-icon> {{item.name}}</h3>
-        <h4><md-icon md-svg-icon="images/icons/owner.svg" style="color: #000;" aria-label="Owner Icon"></md-icon> {{item.owner}}</h4>
 
         <p>
+          <md-icon md-svg-icon="images/icons/owner.svg" style="color: #000;" aria-label="Owner Icon"></md-icon>
+            {{item.owner}}
           <md-icon md-svg-icon="images/icons/fork.svg" style="color: #000;" aria-label="Language Icon"></md-icon>
-           {{item.language}}
+            {{item.forks}} Fork(s)
           <md-icon md-svg-icon="images/icons/star.svg" style="color: #000;" aria-label="Language Icon"></md-icon>
-           {{item.language}}
+            {{item.stars}} Star(s)
         </p>
       </div>
       <md-divider inset></md-divider>
