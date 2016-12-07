@@ -9,23 +9,23 @@
    * # RepositoriesFactory
    * Factory of the myRepositoriesApp
    */
-  var RepositoriesFactory = function() {
+  var RepositoriesFactory = function(REQUEST, RequestFactory, $q) {
     var RepositoriesFactory = {};
 
-    var repoFormatted = function(){
+    var repoFormatted = function() {
       return [{
         owner: "@radames-rex",
         name: "nvd3js-vhline",
         language: "js",
         stars: "3",
         forks: "1"
-      },{
+      }, {
         owner: "@radames-rex",
         name: "zionmvc",
         language: "php",
         stars: "2",
         forks: "1"
-      },{
+      }, {
         owner: "@radames-rex",
         name: "starbus-api",
         language: "ruby",
@@ -34,18 +34,29 @@
       }];
     }
 
-    RepositoriesFactory.getRepositories = function() {
+    RepositoriesFactory.filterRepositories = function() {
       return repoFormatted();
     }
 
-    RepositoriesFactory.filterRepositories = function() {
-      return repoFormatted();
+    RepositoriesFactory.getRepositories = function(user) {
+      var defer = $q.defer();
+      RequestFactory.get(REQUEST.github.url + REQUEST.github.users + user + REQUEST.github.repos).then(function(data) {
+        data = data.data;
+        if (typeof data === 'object') {
+          defer.resolve(data);
+        } else {
+          defer.reject("hasnt object");
+        }
+      }, function(response, status) {
+        defer.reject(response, status);
+      });
+      return defer.promise;
     }
 
     return RepositoriesFactory;
   }
 
-  RepositoriesFactory.$inject = [];
+  RepositoriesFactory.$inject = ['REQUEST', 'RequestFactory', '$q'];
 
   angular
     .module('myRepositoriesApp')
