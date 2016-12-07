@@ -42,7 +42,7 @@ angular
     }).state('main.repositories', {
       url: PATH.repositories,
       templateUrl: 'views/repositories.html',
-      controller: 'RepositoriesCtrl as repositories'
+      controller: 'RepositoriesCtrl as ctrl'
     });
 
     $urlRouterProvider.otherwise(function() {
