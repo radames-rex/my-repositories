@@ -15,23 +15,38 @@ angular
     'ngCookies',
     'ngMessages',
     'ngResource',
-    'ngRoute',
+    'ui.router',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'pascalprecht.translate',
+    'ngMaterial'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+  .constant('PATH', {
+    main: '/myrepo',
+    repositories: '/repositories'
+  })
+  .config(function($stateProvider, $urlRouterProvider, $translateProvider, PATH) {
+
+    /* Configuração do provider de universalização e da linguagem padrão. */
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'translate/messages-',
+      suffix: '.json'
+    });
+    $translateProvider.preferredLanguage('pt');
+
+    /* Configuração dos estados e rotas da aplicação */
+    $stateProvider.state('main', {
+      abstract: true,
+      url: PATH.main,
+      templateUrl: 'views/main.html'
+    }).state('main.repositories', {
+      url: PATH.repositories,
+      templateUrl: 'views/repositories.html',
+      controller: 'RepositoriesCtrl as repositories'
+    });
+
+    $urlRouterProvider.otherwise(function() {
+      return '/myrepo/repositories';
+    });
+
   });

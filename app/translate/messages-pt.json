@@ -1,0 +1,13 @@
+{
+	"general" : {
+		"welcome" : "Seja bem vindo aos Meus Repositórios",
+		"back" : "Voltar",
+		"others" : "Outros",
+		"error" : {
+			"request" : "Não foi possível se conectar ao servidor, tente novamente."
+		}
+	},
+  "repositories" : {
+    "search" : "Busque um repositório..."
+  }
+}
