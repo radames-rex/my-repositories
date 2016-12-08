@@ -8,17 +8,17 @@
 <md-content flex>
   <md-list>
     <md-list-item class="md-3-line" ng-repeat="item in repos | filter:ignoreAccents">
-      <img ng-src="{{item.language}}.svg" alt="{{item.language}}" class="md-avatar">
+      <img ng-src="images/{{(item.language != undefined ? item.language: 'none')}}.svg" alt="{{item.language}}" class="md-avatar">
 
       <div class="md-list-item-text">
-        <h3><md-icon md-svg-icon="images/icons/tag.svg" style="color: #000;" aria-label="Repositorie Icon"></md-icon> {{item.name}}</h3>
+        <h3><md-icon md-svg-icon="images/icons/tag.svg" style="color: #000;" aria-label="Repositorie Icon"></md-icon> {{item.name}}  (<small>{{(item.language != undefined ? item.language: 'Linguagem não definida')}}</small>)</h3>
 
         <p>
           <md-icon md-svg-icon="images/icons/owner.svg" style="color: #000;" aria-label="Owner Icon"></md-icon>
             {{item.owner}}
-          <md-icon md-svg-icon="images/icons/fork.svg" style="color: #000;" aria-label="Language Icon"></md-icon>
+          <md-icon md-svg-icon="images/icons/fork.svg" style="color: #000;" aria-label="Fork Icon"></md-icon>
             {{item.forks}} Fork(s)
-          <md-icon md-svg-icon="images/icons/star.svg" style="color: #000;" aria-label="Language Icon"></md-icon>
+          <md-icon md-svg-icon="images/icons/star.svg" style="color: #000;" aria-label="Star Icon"></md-icon>
             {{item.stars}} Star(s)
         </p>
       </div>
