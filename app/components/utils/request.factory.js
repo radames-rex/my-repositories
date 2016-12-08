@@ -22,7 +22,7 @@
 		var isOnline = function(){
 			var onLine = window.navigator.onLine;
 			return onLine;
-		}
+		};
 
 		/**
 		 * Monta uma requisição Get.

@@ -32,11 +32,11 @@
         stars: "5",
         forks: "1"
       }];
-    }
+    };
 
     RepositoriesFactory.filterRepositories = function() {
       return repoFormatted();
-    }
+    };
 
     RepositoriesFactory.getRepositories = function(user) {
       var defer = $q.defer();
@@ -51,10 +51,10 @@
         defer.reject(response, status);
       });
       return defer.promise;
-    }
+    };
 
     return RepositoriesFactory;
-  }
+  };
 
   RepositoriesFactory.$inject = ['REQUEST', 'RequestFactory', '$q'];
 

@@ -9,7 +9,7 @@
    * # RepositoriesCtrl
    * Controller of the myRepositoriesApp
    */
-  var RepositoriesCtrl = function($scope, RepositoriesFactory) {
+  var RepositoriesCtrl = function($scope, RepositoriesFactory, $timeout) {
 
     $scope.repos = [];
 
@@ -28,7 +28,7 @@
       str = str.replace(/[ç]/, "c");
       str = str.toLowerCase();
       return str.replace(/[^a-z0-9\s]/gi, '');
-    }
+    };
 
     var formatRepos = function(repos) {
       var reposFormatted = [];
@@ -41,15 +41,11 @@
           forks: value.forks_count
         });
       });
-    }
-
-    RepositoriesFactory.getRepositories('radames-rex').then(function(data){
-      $scope.repos = formatRepos(data);
-      $scope.$apply();
-    });
+      return reposFormatted;
+    };
 
     $scope.ignoreAccents = function(item) {
-      if($scope.search != undefined){
+      if($scope.search !== undefined){
         var text = replaceSpecialChars(item.name);
         var search = replaceSpecialChars($scope.search.undefined);
         return text.indexOf(search) > -1;
@@ -58,9 +54,13 @@
       }
     };
 
-  }
+    RepositoriesFactory.getRepositories('radames-rex').then(function(data){
+      $scope.repos = formatRepos(data);
+    });
 
-  RepositoriesCtrl.$inject = ['$scope', 'RepositoriesFactory'];
+  };
+
+  RepositoriesCtrl.$inject = ['$scope', 'RepositoriesFactory', '$timeout'];
 
   angular
     .module('myRepositoriesApp')
