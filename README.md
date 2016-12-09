@@ -1,12 +1,9 @@
 # my-repositories
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
-
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+`grunt build` para buildar a aplicação and `grunt serve` para iniciar o servidor e rodar a aplicação.
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma.
+`grunt test` para rodar os testes com Karma.
